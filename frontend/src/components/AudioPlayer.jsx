@@ -60,7 +60,7 @@ export default function AudioPlayer() {
 
       {/* Mini Controller Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-64 bg-slate-900 border border-amber-500/30 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md z-50 animate-fade-in">
+        <div className="absolute right-0 top-full mt-2 w-64 max-w-[85vw] bg-slate-900 border border-amber-500/30 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md z-50 animate-fade-in">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-amber-300 flex items-center gap-1">
               <span>🎶</span> Nhạc Giáng Sinh

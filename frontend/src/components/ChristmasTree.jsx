@@ -42,12 +42,12 @@ export default function ChristmasTree({
           const isUnlocked = layer.is_unlocked;
           const isTop = layer.layer_index === 0;
 
-          // Chiều rộng theo tầng để tạo hình tam giác cây thông tự nhiên
+          // Chiều rộng theo tầng để tạo hình tam giác cây thông tự nhiên (co giãn linh hoạt trên mobile)
           const layerWidths = [
-            'w-40 sm:w-48', // Đỉnh
-            'w-64 sm:w-72', // Tầng 1
-            'w-80 sm:w-96', // Tầng 2
-            'w-96 sm:w-[420px]' // Tầng 3
+            'w-36 sm:w-48 max-w-[85vw]', // Đỉnh
+            'w-56 sm:w-72 max-w-[90vw]', // Tầng 1
+            'w-72 sm:w-96 max-w-[94vw]', // Tầng 2
+            'w-[340px] sm:w-[420px] max-w-[98vw]' // Tầng 3
           ];
 
           return (
@@ -57,7 +57,7 @@ export default function ChristmasTree({
             >
               {/* Tán lá cây thông SVG / CSS */}
               <div
-                className={`w-full py-6 px-4 rounded-3xl relative shadow-xl transition-all ${
+                className={`w-full py-5 sm:py-6 px-3 sm:px-4 rounded-3xl relative shadow-xl transition-all ${
                   isUnlocked
                     ? 'bg-gradient-to-b from-emerald-700 via-green-800 to-emerald-950 border-t-2 border-green-500/50 shadow-green-950/60'
                     : 'bg-gradient-to-b from-slate-800 to-slate-900 border-2 border-dashed border-slate-700/80 opacity-75'
@@ -66,7 +66,7 @@ export default function ChristmasTree({
                   clipPath: isTop
                     ? 'polygon(50% 0%, 0% 100%, 100% 100%)'
                     : 'polygon(50% 0%, 15% 15%, 0% 100%, 100% 100%, 85% 15%)',
-                  minHeight: isTop ? '110px' : '90px'
+                  minHeight: isTop ? '100px' : '85px'
                 }}
               >
                 {/* Viền tuyết giả định đọng trên mép cành thông */}
@@ -74,9 +74,9 @@ export default function ChristmasTree({
               </div>
 
               {/* Lớp phủ nội dung Slots */}
-              <div className="absolute inset-0 flex items-center justify-center pt-3">
+              <div className="absolute inset-0 flex items-center justify-center pt-2 sm:pt-3">
                 {isUnlocked ? (
-                  <div className="flex items-center justify-center gap-4 sm:gap-6 z-10">
+                  <div className="flex items-center justify-center gap-2 sm:gap-6 z-10 px-1">
                     {layer.slots.map((slot) => {
                       const hasItem = !!slot.item;
                       return (
@@ -85,23 +85,23 @@ export default function ChristmasTree({
                             /* Slot đã gắn vật phẩm */
                             <div className="flex flex-col items-center">
                               <div
-                                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-slate-950/70 border-2 border-amber-400/60 flex items-center justify-center shadow-lg shadow-amber-400/20 backdrop-blur-sm cursor-pointer hover:scale-110 transition-transform"
+                                className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-slate-950/75 border-2 border-amber-400/60 flex items-center justify-center shadow-lg shadow-amber-400/20 backdrop-blur-sm cursor-pointer hover:scale-110 active:scale-95 transition-transform"
                                 title={`${slot.item.name} (+${slot.item.festive_score} điểm)`}
                               >
-                                <ItemIcon code={slot.item.code} category={slot.item.category} size="text-2xl sm:text-3xl" />
+                                <ItemIcon code={slot.item.code} category={slot.item.category} size="text-xl sm:text-3xl" />
                               </div>
 
-                              {/* Nút gỡ vật phẩm khi chủ sở hữu hover */}
+                              {/* Nút gỡ vật phẩm: hiển thị sẵn trên mobile (opacity-90) và hover trên desktop */}
                               {isOwner && (
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     onUnequipSlot(layer.layer_index, slot.slot_index);
                                   }}
-                                  className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-600 hover:bg-red-500 text-white rounded-full flex items-center justify-center shadow-md opacity-0 group-hover/slot:opacity-100 transition-opacity"
+                                  className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 w-4 h-4 sm:w-5 sm:h-5 bg-red-600 hover:bg-red-500 text-white rounded-full flex items-center justify-center shadow-md opacity-90 sm:opacity-0 sm:group-hover/slot:opacity-100 transition-opacity"
                                   title="Gỡ vật phẩm cất vào túi"
                                 >
-                                  <X className="w-3 h-3" />
+                                  <X className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                                 </button>
                               )}
                             </div>
@@ -110,14 +110,14 @@ export default function ChristmasTree({
                             isOwner && (
                               <button
                                 onClick={() => onSelectSlot(layer.layer_index, slot.slot_index, layer.layer_name)}
-                                className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 border-dashed flex items-center justify-center transition-all ${
+                                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-dashed flex items-center justify-center transition-all ${
                                   isTop
                                     ? 'border-amber-400/80 bg-amber-400/10 text-amber-300 hover:bg-amber-400/20 animate-pulse'
-                                    : 'border-white/50 bg-black/30 text-white/70 hover:bg-white/20 hover:scale-105'
+                                    : 'border-white/50 bg-black/30 text-white/70 hover:bg-white/20 active:scale-95'
                                 }`}
                                 title={isTop ? 'Gắn Ngôi sao đỉnh cây' : 'Bấm để trang trí'}
                               >
-                                <Plus className="w-5 h-5" />
+                                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
                               </button>
                             )
                           )}

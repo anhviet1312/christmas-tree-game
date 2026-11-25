@@ -192,7 +192,7 @@ export default function AdminModal({
                           {isAdmin ? 'Admin' : 'Player'}
                         </span>
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-slate-400 mt-1">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-slate-400 mt-1">
                         <span>Số dư: <strong className="text-blue-300 font-mono">{u.snowflakes.toLocaleString()} ❄️</strong></span>
                         <span>Tầng: <strong className="text-green-400">{u.unlocked_layers}/4</strong></span>
                         <span>Điểm: <strong className="text-amber-300">{u.total_festive_score} ⭐</strong></span>
@@ -201,7 +201,7 @@ export default function AdminModal({
                   </div>
 
                   {/* Right: Actions */}
-                  <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                  <div className="flex items-center gap-2 w-full sm:w-auto justify-end sm:justify-start pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800/80 shrink-0">
                     {/* Buff Snowflakes Button */}
                     <button
                       onClick={() => {

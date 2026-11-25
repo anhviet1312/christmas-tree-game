@@ -67,7 +67,7 @@ export default function ShopModal({
         </div>
 
         {/* Category Tabs */}
-        <div className="px-4 py-2 border-b border-slate-800/80 flex items-center gap-1.5 overflow-x-auto">
+        <div className="px-3 sm:px-4 py-2 border-b border-slate-800/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}

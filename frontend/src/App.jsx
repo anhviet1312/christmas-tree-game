@@ -9,6 +9,7 @@ import InventoryModal from './components/InventoryModal';
 import AuthModal from './components/AuthModal';
 import VisitModal from './components/VisitModal';
 import AdminModal from './components/AdminModal';
+import BottomNav from './components/BottomNav';
 import { api } from './services/api';
 import { Sparkles, Gift, ShoppingBag, Eye, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -241,7 +242,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative pb-12">
+    <div className="min-h-screen flex flex-col relative pb-24 md:pb-12">
       {/* Hiệu ứng tuyết rơi tự nhiên */}
       <Snowfall count={40} />
 
@@ -422,6 +423,15 @@ export default function App() {
           onRefreshCurrentUserData={loadUserData}
         />
       )}
+
+      {/* Mobile Bottom Navigation Bar (Hiển thị cố định dưới cùng trên màn hình điện thoại) */}
+      <BottomNav
+        user={user}
+        onOpenShop={() => setIsShopOpen(true)}
+        onOpenInventory={() => setIsInventoryOpen(true)}
+        onOpenVisit={() => setIsVisitOpen(true)}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+      />
     </div>
   );
 }

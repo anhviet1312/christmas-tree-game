@@ -29,24 +29,24 @@ export default function Navbar({
 
         {/* Resources & Status */}
         {user && (
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4">
             {/* Snowflakes Counter */}
-            <div className="flex items-center gap-2 bg-gradient-to-r from-blue-950/80 to-slate-900 border border-blue-500/40 px-3 py-1.5 rounded-full shadow-lg shadow-blue-500/10">
-              <span className="text-xl animate-spin" style={{ animationDuration: '8s' }}>❄️</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-blue-950/80 to-slate-900 border border-blue-500/40 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-lg shadow-blue-500/10">
+              <span className="text-base sm:text-xl animate-spin" style={{ animationDuration: '8s' }}>❄️</span>
               <div className="flex flex-col">
-                <span className="text-xs text-blue-300 uppercase tracking-wider font-semibold">Tuyết</span>
-                <span className="text-sm sm:text-base font-bold text-white tabular-nums">
+                <span className="text-[10px] sm:text-xs text-blue-300 uppercase tracking-wider font-semibold">Tuyết</span>
+                <span className="text-xs sm:text-base font-bold text-white tabular-nums">
                   {snowflakes.toLocaleString()}
                 </span>
               </div>
             </div>
 
             {/* Festive Score */}
-            <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-950/70 to-slate-900 border border-amber-500/40 px-3 py-1.5 rounded-full shadow-lg shadow-amber-500/10">
-              <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+            <div className="flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-amber-950/70 to-slate-900 border border-amber-500/40 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-lg shadow-amber-500/10">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 animate-pulse" />
               <div className="flex flex-col">
-                <span className="text-xs text-amber-300 uppercase tracking-wider font-semibold">Khí Thế</span>
-                <span className="text-sm sm:text-base font-bold text-amber-200 tabular-nums">
+                <span className="text-[10px] sm:text-xs text-amber-300 uppercase tracking-wider font-semibold">Khí Thế</span>
+                <span className="text-xs sm:text-base font-bold text-amber-200 tabular-nums">
                   {festiveScore} ⭐
                 </span>
               </div>
@@ -55,49 +55,52 @@ export default function Navbar({
         )}
 
         {/* Actions & User */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Christmas Music Player */}
           <AudioPlayer />
 
           {user ? (
             <>
-              <button
-                onClick={onOpenShop}
-                className="flex items-center gap-1.5 bg-red-600/90 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition-all shadow-md shadow-red-600/20 active:scale-95"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span className="hidden md:inline">Cửa Hàng</span>
-              </button>
-
-              <button
-                onClick={onOpenInventory}
-                className="flex items-center gap-1.5 bg-green-700/90 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition-all shadow-md shadow-green-700/20 active:scale-95"
-              >
-                <Backpack className="w-4 h-4" />
-                <span className="hidden md:inline">Túi Đồ</span>
-              </button>
-
-              <button
-                onClick={onOpenVisit}
-                className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg text-sm font-semibold border border-slate-700 transition-all active:scale-95"
-              >
-                <Eye className="w-4 h-4" />
-                <span className="hidden md:inline">Ghé Thăm</span>
-              </button>
-
-              {user.role === 'admin' && (
+              {/* Desktop Only Action Buttons (On mobile they appear in BottomNav) */}
+              <div className="hidden md:flex items-center gap-2">
                 <button
-                  onClick={onOpenAdmin}
-                  className="flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-amber-600/30 active:scale-95"
-                  title="Mở Bảng Quản Trị Viên"
+                  onClick={onOpenShop}
+                  className="flex items-center gap-1.5 bg-red-600/90 hover:bg-red-500 text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition-all shadow-md shadow-red-600/20 active:scale-95"
                 >
-                  <Shield className="w-4 h-4" />
-                  <span className="hidden md:inline">Admin</span>
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Cửa Hàng</span>
                 </button>
-              )}
+
+                <button
+                  onClick={onOpenInventory}
+                  className="flex items-center gap-1.5 bg-green-700/90 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg text-sm font-semibold transition-all shadow-md shadow-green-700/20 active:scale-95"
+                >
+                  <Backpack className="w-4 h-4" />
+                  <span>Túi Đồ</span>
+                </button>
+
+                <button
+                  onClick={onOpenVisit}
+                  className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg text-sm font-semibold border border-slate-700 transition-all active:scale-95"
+                >
+                  <Eye className="w-4 h-4" />
+                  <span>Ghé Thăm</span>
+                </button>
+
+                {user.role === 'admin' && (
+                  <button
+                    onClick={onOpenAdmin}
+                    className="flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-amber-600/30 active:scale-95"
+                    title="Mở Bảng Quản Trị Viên"
+                  >
+                    <Shield className="w-4 h-4" />
+                    <span>Admin</span>
+                  </button>
+                )}
+              </div>
 
               {/* User Dropdown / Logout */}
-              <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
+              <div className="flex items-center gap-1.5 pl-1.5 sm:pl-2 border-l border-slate-800">
                 <span className="text-xs text-slate-300 font-medium hidden lg:inline max-w-[120px] truncate">
                   {user.display_name || user.username}
                 </span>
@@ -113,10 +116,10 @@ export default function Navbar({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-red-600/30 transition-all active:scale-95"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-red-600/30 transition-all active:scale-95"
             >
-              <UserIcon className="w-4 h-4" />
-              Đăng Nhập / Đăng Ký
+              <UserIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Đăng Nhập</span>
             </button>
           )}
         </div>

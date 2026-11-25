@@ -62,9 +62,9 @@ export default function ResourceCard({
   const canClaim = secondsLeft <= 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 my-3 sm:my-6">
       {/* 1. Thu Hoạch Tuyết Chu Kỳ (30 Phút) */}
-      <div className="bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-blue-500/30 rounded-2xl p-4 shadow-xl relative overflow-hidden flex flex-col justify-between">
+      <div className="bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-900 border border-blue-500/30 rounded-2xl p-3.5 sm:p-4 shadow-xl relative overflow-hidden flex flex-col justify-between">
         <div className="absolute top-0 right-0 w-28 h-28 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
 
         <div>
