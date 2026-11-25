@@ -12,6 +12,7 @@ import AdminModal from './components/AdminModal';
 import { api } from './services/api';
 import { Sparkles, Gift, ShoppingBag, Eye, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { christmasAudio } from './services/audio';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -81,6 +82,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const data = await api.claimResource();
+      christmasAudio.playSuccessSound();
       showToast(data.message, 'success');
       // Cập nhật lại tài nguyên và cây
       const updatedRes = await api.getResources();
@@ -99,6 +101,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const data = await api.dailyCheckin();
+      christmasAudio.playSuccessSound();
       showToast(data.message, 'success');
       const updatedRes = await api.getResources();
       setResources(updatedRes);
@@ -116,6 +119,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const data = await api.buyItem(itemId, quantity);
+      christmasAudio.playSuccessSound();
       showToast(data.message, 'success');
       const [updatedRes, updatedInv] = await Promise.all([
         api.getResources(),
@@ -137,6 +141,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const data = await api.equipSlot(layerIndex, slotIndex, itemId);
+      christmasAudio.playEquipSound();
       showToast(data.message, 'success');
       const [updatedTree, updatedInv] = await Promise.all([
         api.getMyTree(),

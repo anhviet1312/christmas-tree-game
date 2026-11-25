@@ -44,3 +44,4 @@ Giao diện Web được xây dựng bằng **React 18 + Vite + Tailwind CSS + L
 | **`VisitModal`** | `src/components/VisitModal.jsx` | Hộp thoại tìm kiếm và chiêm ngưỡng cây thông của bạn bè theo username. |
 | **`Snowfall`** | `src/components/Snowfall.jsx` | Hiệu ứng tuyết rơi tự nhiên toàn màn hình với tốc độ, kích thước và độ trong suốt ngẫu nhiên. |
 | **`ItemIcon`** | `src/components/ItemIcon.jsx` | Hiển thị emoji và animation sinh động cho từng món đồ (rung rinh `sway`, lấp lánh `twinkle`, trôi nổi `float`). |
+| **`AudioPlayer`** | `src/components/AudioPlayer.jsx` | **Trình phát nhạc Giáng Sinh** tích hợp trên Navbar:<br>- Bật / Tắt âm thanh (Mute/Unmute).<br>- Tùy chỉnh thanh trượt âm lượng.<br>- Chuyển đổi giữa 3 bản nhạc: *Jingle Bells*, *We Wish You A Merry Christmas*, *Deck The Halls*.<br>- Phát hiệu ứng âm thanh chuông ngân khi thu hoạch tuyết và gắn đồ lên cây. |

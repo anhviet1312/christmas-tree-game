@@ -45,3 +45,4 @@ Tài liệu này dùng để theo dõi và xác nhận chất lượng trải ng
 | **UI-20** | **Bảng Quản Trị Viên (`AdminModal`)** | Mở Admin Panel, hiển thị danh sách tất cả người chơi kèm số dư tuyết, cấp tầng cây và điểm không khí. | ✅ PASS |
 | **UI-21** | **Thao tác Buff Tuyết cho User** | Bấm nút "Buff Tuyết ❄️", chọn số lượng (vd: +500) và bấm xác nhận: Tuyết được cộng ngay cho user đó, có hiệu ứng pháo hoa Confetti. | ✅ PASS |
 | **UI-22** | **Phong / Hạ quyền Admin** | Bấm nút đổi quyền cho người chơi: Quyền hạn được cập nhật lập tức trong danh sách quản lý. | ✅ PASS |
+| **UI-23** | **Trình phát Nhạc Giáng Sinh (`AudioPlayer`)** | Bấm bật nhạc: Giai điệu chuông Giáng sinh du dương vang lên, icon nốt nhạc nhún nhảy; đổi bài và chỉnh âm lượng mượt mà. | ✅ PASS |

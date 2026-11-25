@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, ShoppingBag, Backpack, Eye, LogOut, User as UserIcon, Shield } from 'lucide-react';
+import AudioPlayer from './AudioPlayer';
 
 export default function Navbar({
   user,
@@ -55,6 +56,9 @@ export default function Navbar({
 
         {/* Actions & User */}
         <div className="flex items-center gap-2">
+          {/* Christmas Music Player */}
+          <AudioPlayer />
+
           {user ? (
             <>
               <button
