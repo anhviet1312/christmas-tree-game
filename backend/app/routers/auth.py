@@ -21,12 +21,16 @@ def register(user_data: UserRegister, db: Session = Depends(get_db)):
             detail="Tên đăng nhập này đã được sử dụng!"
         )
 
-    # 2. Tạo tài khoản User
+    # 2. Tạo tài khoản User (Tự động gán quyền admin nếu username là 'admin' hoặc là tài khoản đầu tiên)
+    user_count = db.query(User).count()
+    role = "admin" if (user_count == 0 or user_data.username.lower() == "admin") else "user"
+
     hashed_pwd = get_password_hash(user_data.password)
     new_user = User(
         username=user_data.username,
         password_hash=hashed_pwd,
-        display_name=user_data.display_name or user_data.username
+        display_name=user_data.display_name or user_data.username,
+        role=role
     )
     db.add(new_user)
     db.flush()  # Lấy ID của new_user

@@ -101,5 +101,25 @@ export const api = {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify({ layer_index: layerIndex, slot_index: slotIndex })
+    }).then(handleResponse),
+
+  // Admin APIs
+  adminGetUsers: () =>
+    fetch(`${API_BASE}/admin/users`, {
+      headers: getHeaders()
+    }).then(handleResponse),
+
+  adminBuffUser: (userId, amount, reason = "Admin quà tặng") =>
+    fetch(`${API_BASE}/admin/users/${userId}/buff`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ amount, reason })
+    }).then(handleResponse),
+
+  adminSetRole: (userId, role) =>
+    fetch(`${API_BASE}/admin/users/${userId}/set-role`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ role })
     }).then(handleResponse)
 };

@@ -22,6 +22,9 @@ Giao diện Web được xây dựng bằng **React 18 + Vite + Tailwind CSS + L
 | `api.upgradeLayer` | `POST /api/tree/upgrade-layer` | Gửi yêu cầu mở khóa tầng tiếp theo của cây. |
 | `api.equipSlot` | `POST /api/tree/slot/equip` | Gắn vật phẩm từ túi đồ vào slot trang trí đã chọn. |
 | `api.unequipSlot` | `POST /api/tree/slot/unequip` | Gỡ vật phẩm khỏi slot và cất lại vào túi đồ. |
+| `api.adminGetUsers` | `GET /api/admin/users` | Admin: Tải danh sách người chơi kèm tài nguyên & thông số cây thông. |
+| `api.adminBuffUser` | `POST /api/admin/users/:id/buff` | Admin: Thêm/bớt Bông tuyết ❄️ cho người chơi chỉ định. |
+| `api.adminSetRole` | `POST /api/admin/users/:id/set-role` | Admin: Thay đổi quyền hạn giữa 'admin' và 'user'. |
 
 ---
 
@@ -30,7 +33,8 @@ Giao diện Web được xây dựng bằng **React 18 + Vite + Tailwind CSS + L
 | Tên Component | File | Mô Tả & Tương Tác |
 | :--- | :--- | :--- |
 | **`App`** | `src/App.jsx` | Component gốc: Quản lý State tập trung (User, Resources, Tree, Shop, Inventory), điều phối các Modal và hiển thị thông báo Toast. |
-| **`Navbar`** | `src/components/Navbar.jsx` | Thanh điều hướng đầu trang:<br>- Đếm số Bông tuyết ❄️ (hiệu ứng xoay vòng).<br>- Điểm Khí thế Giáng sinh ⭐.<br>- Nút mở Cửa hàng, Túi đồ, Ghé thăm bạn bè.<br>- Đăng nhập / Đăng xuất người dùng. |
+| **`Navbar`** | `src/components/Navbar.jsx` | Thanh điều hướng đầu trang:<br>- Đếm số Bông tuyết ❄️ (hiệu ứng xoay vòng).<br>- Điểm Khí thế Giáng sinh ⭐.<br>- Nút mở Cửa hàng, Túi đồ, Ghé thăm bạn bè.<br>- Nút `🛡️ Admin` đặc biệt (chỉ hiển thị khi tài khoản có quyền Admin).<br>- Đăng nhập / Đăng xuất người dùng. |
+| **`AdminModal`** | `src/components/AdminModal.jsx` | **Bảng Quản Trị Viên (Admin Panel)**:<br>- Thống kê tổng số người chơi, tổng tuyết toàn server.<br>- Tìm kiếm người chơi theo username/tên hiển thị.<br>- Nút `Buff Tuyết ❄️` (nhập số lượng hoặc chọn nhanh +100, +500, +1000, +5000).<br>- Nút phong quyền Admin hoặc hạ quyền User. |
 | **`ChristmasTree`** | `src/components/ChristmasTree.jsx` | **Trái tim của trò chơi**: Hiển thị cây thông 4 tầng hình chóp lá xanh viền tuyết.<br>- Tầng 0 (Đỉnh): 1 slot cho Sao/Thiên thần.<br>- Tầng 1 (Trên): 2 slots.<br>- Tầng 2 (Giữa): 3 slots (có nút mở khóa 150 ❄️).<br>- Tầng 3 (Đáy): 4 slots (có nút mở khóa 300 ❄️).<br>- Hover vào slot đã cắm hiển thị nút gỡ `(x)`. |
 | **`ResourceCard`** | `src/components/ResourceCard.jsx` | Hiển thị 2 thẻ thu thập tài nguyên:<br>1. **Thu Hoạch Tuyết (30 phút)**: Đồng hồ đếm ngược `MM:SS` thời gian thực, nút bấm phát sáng khi sẵn sàng.<br>2. **Điểm Danh Ngày**: Đếm chuỗi streak ngày liên tiếp, nút nhận quà 100+ ❄️. |
 | **`ShopModal`** | `src/components/ShopModal.jsx` | Cửa hàng Giáng Sinh dạng Popup:<br>- Lọc theo danh mục: Tất cả, Đỉnh cây ⭐️, Treo cành 🔴, Dây đèn ✨, Hộp quà 🎁.<br>- Kiểm tra số dư Bông tuyết, nút Mua (vô hiệu hóa nếu không đủ tuyết). |

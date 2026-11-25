@@ -22,6 +22,7 @@ class UserOut(BaseModel):
     id: int
     username: str
     display_name: Optional[str] = None
+    role: str = "user"
     created_at: datetime
 
     class Config:
@@ -115,3 +116,23 @@ class UpgradeLayerResponse(BaseModel):
     message: str
     unlocked_layer: int
     remaining_snowflakes: int
+
+# --- Admin Schemas ---
+class AdminUserOut(BaseModel):
+    id: int
+    username: str
+    display_name: Optional[str] = None
+    role: str = "user"
+    created_at: datetime
+    snowflakes: int
+    unlocked_layers: int
+    total_festive_score: int
+    login_streak: int
+
+class BuffResourceRequest(BaseModel):
+    amount: int = Field(..., ge=-10000000, le=10000000, description="Số lượng tuyết cộng thêm (có thể âm để trừ)")
+    reason: Optional[str] = Field("Admin quà tặng", description="Lý do buff")
+
+class SetRoleRequest(BaseModel):
+    role: str = Field(..., pattern="^(user|admin)$", description="Quyền mới: 'user' hoặc 'admin'")
+

@@ -17,6 +17,7 @@ class User(Base):
     username = Column(String(50), unique=True, index=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
     display_name = Column(String(100), nullable=True)
+    role = Column(String(20), default="user", nullable=False) # 'user' hoặc 'admin'
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # Quan hệ 1 - 1

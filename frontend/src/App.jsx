@@ -8,6 +8,7 @@ import EquipModal from './components/EquipModal';
 import InventoryModal from './components/InventoryModal';
 import AuthModal from './components/AuthModal';
 import VisitModal from './components/VisitModal';
+import AdminModal from './components/AdminModal';
 import { api } from './services/api';
 import { Sparkles, Gift, ShoppingBag, Eye, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -24,6 +25,7 @@ export default function App() {
   const [isInventoryOpen, setIsInventoryOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isVisitOpen, setIsVisitOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
 
   const [toast, setToast] = useState(null);
@@ -246,6 +248,7 @@ export default function App() {
         onOpenShop={() => setIsShopOpen(true)}
         onOpenInventory={() => setIsInventoryOpen(true)}
         onOpenVisit={() => setIsVisitOpen(true)}
+        onOpenAdmin={() => setIsAdminOpen(true)}
         onOpenAuth={() => setIsAuthOpen(true)}
         onLogout={handleLogout}
       />
@@ -402,6 +405,18 @@ export default function App() {
         onFetchPublicTree={api.getPublicTree}
         isLoading={isLoading}
       />
+
+      {user?.role === 'admin' && (
+        <AdminModal
+          isOpen={isAdminOpen}
+          onClose={() => setIsAdminOpen(false)}
+          onGetUsers={api.adminGetUsers}
+          onBuffUser={api.adminBuffUser}
+          onSetRole={api.adminSetRole}
+          currentUserId={user?.id}
+          onRefreshCurrentUserData={loadUserData}
+        />
+      )}
     </div>
   );
 }

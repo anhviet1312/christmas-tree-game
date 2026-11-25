@@ -159,8 +159,65 @@ def run_all_tests():
         upgrade_data = res.json()
         print(f"✅ 18. Mở khóa tầng cây tiếp theo: OK -> {upgrade_data['message']}")
 
+        # 19. Đăng ký tài khoản Admin chuyên biệt
+        admin_user = f"admin_{int(time.time())}"
+        # Set username chứa 'admin' để tự nhận role 'admin'
+        res = client.post("/api/auth/register", json={
+            "username": admin_user,
+            "password": "adminpassword123",
+            "display_name": "Quản Trị Viên Giáng Sinh 🛡️"
+        })
+        assert res.status_code == 201
+        admin_token = res.json()["access_token"]
+        admin_headers = {"Authorization": f"Bearer {admin_token}"}
+        # Tự gán quyền admin cho admin_user để test
+        from app.database import SessionLocal
+        from app.models import User
+        db = SessionLocal()
+        u = db.query(User).filter(User.username == admin_user).first()
+        u.role = "admin"
+        db.commit()
+        db.close()
+        print(f"✅ 19. Tạo tài khoản Admin [{admin_user}]: OK")
+
+        # 20. Chặn người dùng thường truy cập API Admin
+        res = client.get("/api/admin/users", headers=headers)
+        assert res.status_code == 403, "User thường không được truy cập API Admin"
+        print("✅ 20. Chặn User thường vào API Admin: OK (403 Forbidden)")
+
+        # 21. Admin lấy danh sách toàn bộ User
+        res = client.get("/api/admin/users", headers=admin_headers)
+        assert res.status_code == 200
+        admin_users_list = res.json()
+        assert len(admin_users_list) >= 2
+        print(f"✅ 21. Admin lấy danh sách Users: OK, tìm thấy {len(admin_users_list)} người chơi")
+
+        # 22. Admin Buff tài nguyên cho người chơi thường (+500 bông tuyết)
+        target_uid = auth_data["user"]["id"]
+        res = client.post(f"/api/admin/users/{target_uid}/buff", headers=admin_headers, json={
+            "amount": 500,
+            "reason": "Thưởng Giáng sinh từ Admin"
+        })
+        assert res.status_code == 200
+        buff_result = res.json()
+        print(f"✅ 22. Admin buff tài nguyên: OK -> {buff_result['message']}")
+
+        # 23. Kiểm tra số dư người chơi sau khi được buff
+        res = client.get("/api/resources", headers=headers)
+        assert res.status_code == 200
+        new_balance = res.json()["snowflakes"]
+        assert new_balance == buff_result["new_balance"]
+        print(f"✅ 23. Kiểm tra số dư người chơi sau Buff: OK, đạt {new_balance} ❄️")
+
+        # 24. Admin thay đổi Role của người chơi
+        res = client.post(f"/api/admin/users/{target_uid}/set-role", headers=admin_headers, json={
+            "role": "admin"
+        })
+        assert res.status_code == 200
+        print(f"✅ 24. Admin phong quyền Admin cho User: OK -> {res.json()['message']}")
+
     print("=" * 60)
-    print("🎉 TẤT CẢ 18/18 BƯỚC KIỂM THỬ BACKEND ĐỀU THÀNH CÔNG RỰC RỠ! 🎉")
+    print("🎉 TẤT CẢ 24/24 BƯỚC KIỂM THỬ BACKEND ĐỀU THÀNH CÔNG RỰC RỠ! 🎉")
     print("=" * 60)
 
 if __name__ == "__main__":

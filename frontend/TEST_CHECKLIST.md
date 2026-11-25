@@ -41,3 +41,7 @@ Tài liệu này dùng để theo dõi và xác nhận chất lượng trải ng
 | **UI-16** | **Mở khóa Tầng cây mới** | Bấm nút "Mở Khóa Tầng 2 (150 ❄️)": Xác nhận popup -> Tầng 2 biến từ màu xám mờ sang màu xanh thông tươi tốt với 3 slot mới. | ✅ PASS |
 | **UI-17** | **Ghé thăm Bạn bè (`VisitModal`)** | Nhập username bạn bè và bấm Tìm kiếm: Hiển thị nguyên vẹn cây thông của bạn bè ở chế độ chỉ xem (không có nút gỡ đồ). | ✅ PASS |
 | **UI-18** | **Tương thích Di động (Responsive)** | Giao diện tự động co giãn vừa vặn trên cả màn hình điện thoại (Mobile) và máy tính (Desktop). | ✅ PASS |
+| **UI-19** | **Hiển thị nút `🛡️ Admin` trên Navbar** | Khi đăng nhập tài khoản có role `admin`, nút Admin xuất hiện trên Navbar; tài khoản thường không thấy. | ✅ PASS |
+| **UI-20** | **Bảng Quản Trị Viên (`AdminModal`)** | Mở Admin Panel, hiển thị danh sách tất cả người chơi kèm số dư tuyết, cấp tầng cây và điểm không khí. | ✅ PASS |
+| **UI-21** | **Thao tác Buff Tuyết cho User** | Bấm nút "Buff Tuyết ❄️", chọn số lượng (vd: +500) và bấm xác nhận: Tuyết được cộng ngay cho user đó, có hiệu ứng pháo hoa Confetti. | ✅ PASS |
+| **UI-22** | **Phong / Hạ quyền Admin** | Bấm nút đổi quyền cho người chơi: Quyền hạn được cập nhật lập tức trong danh sách quản lý. | ✅ PASS |

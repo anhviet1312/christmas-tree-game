@@ -48,7 +48,17 @@ Hệ thống Backend được xây dựng bằng **Python (FastAPI + SQLAlchemy 
 
 ---
 
-## 5. Quy Tắc Cấu Trúc Cây Thông (`config.py`)
+## 5. Phân Hệ Quản Trị Viên (Admin Management) (`routers/admin.py`)
+
+| Tên Function | Phương thức & URL | Mô tả nghiệp vụ | Dữ liệu đầu vào | Dữ liệu trả về |
+| :--- | :--- | :--- | :--- | :--- |
+| `get_all_users` | `GET /api/admin/users` | Lấy danh sách toàn bộ người chơi trong hệ thống kèm số dư tuyết, tầng cây mở, điểm Festive và vai trò. | Admin Token | Danh sách người chơi (`AdminUserOut`) |
+| `buff_user_resource` | `POST /api/admin/users/{user_id}/buff` | Thêm (hoặc bớt) Bông tuyết ❄️ cho người chơi được chỉ định. | Admin Token + `amount`, `reason` | Số dư cũ, số dư mới và thông báo |
+| `set_user_role` | `POST /api/admin/users/{user_id}/set-role` | Thay đổi quyền hạn của người chơi (`admin` hoặc `user`). Chặn tự hạ quyền của chính mình. | Admin Token + `role` | Role mới của user |
+
+---
+
+## 6. Quy Tắc Cấu Trúc Cây Thông (`config.py`)
 *   **Tầng 0 (Đỉnh cây):** 1 slot (Slot 0) — *Chỉ cho phép loại `TOPPER`*.
 *   **Tầng 1 (Tầng trên):** 2 slot (Slot 0, 1) — *Cho phép `ORNAMENT`, `LIGHT`*.
 *   **Tầng 2 (Tầng giữa):** 3 slot (Slot 0, 1, 2) — *Mở khóa: 150 ❄️*.

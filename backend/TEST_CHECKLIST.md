@@ -35,6 +35,11 @@ python backend/test_api.py
 | **TC-17** | **Gỡ đồ khỏi Slot (`POST /api/tree/slot/unequip`)** | Gỡ Quả cầu đỏ -> Slot trở về trống, trả lại +1 món vào Túi đồ. | ✅ PASS |
 | **TC-18** | **Mở khóa Tầng tiếp theo (`POST /api/tree/upgrade-layer`)** | Trừ 150 Bông tuyết và mở thành công Tầng 2. | ✅ PASS |
 | **TC-19** | **Xem Cây thông bạn bè (`GET /api/tree/public/{username}`)** | Trả về trạng thái cây công khai của người chơi khác mà không yêu cầu token chủ sở hữu. | ✅ PASS |
+| **TC-20** | **Chặn User thường truy cập Admin (`GET /api/admin/users`)** | Tài khoản không có role admin bị từ chối với mã 403 Forbidden. | ✅ PASS |
+| **TC-21** | **Admin lấy danh sách người chơi (`GET /api/admin/users`)** | Tài khoản Admin lấy được danh sách đầy đủ toàn bộ người chơi. | ✅ PASS |
+| **TC-22** | **Admin Buff tài nguyên (`POST /api/admin/users/{id}/buff`)** | Cộng thành công +500 Bông tuyết cho người chơi được chỉ định. | ✅ PASS |
+| **TC-23** | **Xác nhận số dư sau Buff** | Số dư của người chơi lập tức phản ánh chính xác số tuyết được Admin buff. | ✅ PASS |
+| **TC-24** | **Admin phân quyền Role (`POST /api/admin/users/{id}/set-role`)** | Thay đổi quyền hạn thành công (phong Admin hoặc hạ User). | ✅ PASS |
 
 ---
 

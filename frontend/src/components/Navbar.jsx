@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ShoppingBag, Backpack, Eye, LogOut, User as UserIcon } from 'lucide-react';
+import { Sparkles, ShoppingBag, Backpack, Eye, LogOut, User as UserIcon, Shield } from 'lucide-react';
 
 export default function Navbar({
   user,
@@ -8,6 +8,7 @@ export default function Navbar({
   onOpenShop,
   onOpenInventory,
   onOpenVisit,
+  onOpenAdmin,
   onOpenAuth,
   onLogout
 }) {
@@ -79,6 +80,17 @@ export default function Navbar({
                 <Eye className="w-4 h-4" />
                 <span className="hidden md:inline">Ghé Thăm</span>
               </button>
+
+              {user.role === 'admin' && (
+                <button
+                  onClick={onOpenAdmin}
+                  className="flex items-center gap-1.5 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-white px-3 py-1.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-amber-600/30 active:scale-95"
+                  title="Mở Bảng Quản Trị Viên"
+                >
+                  <Shield className="w-4 h-4" />
+                  <span className="hidden md:inline">Admin</span>
+                </button>
+              )}
 
               {/* User Dropdown / Logout */}
               <div className="flex items-center gap-2 pl-2 border-l border-slate-800">

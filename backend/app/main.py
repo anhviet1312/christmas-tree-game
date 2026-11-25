@@ -16,15 +16,27 @@ from contextlib import asynccontextmanager
 
 from app.database import engine, Base, SessionLocal
 from app.seed import seed_items
-from app.routers import auth, resources, shop, tree
+from app.routers import auth, resources, shop, tree, admin
+from sqlalchemy import text
 
-# Đảm bảo bảng được tạo ngay cả khi import độc lập
+def run_migrations():
+    """Tự động thêm cột role vào bảng users nếu chưa có"""
+    with engine.connect() as conn:
+        try:
+            conn.execute(text("ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user'"))
+            conn.commit()
+        except Exception:
+            pass
+
+# Đảm bảo bảng được tạo và migration chạy ngay cả khi import độc lập
 Base.metadata.create_all(bind=engine)
+run_migrations()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Khởi tạo bảng CSDL khi server bắt đầu chạy
     Base.metadata.create_all(bind=engine)
+    run_migrations()
     
     # Khởi tạo vật phẩm cửa hàng ban đầu
     db = SessionLocal()
@@ -67,6 +79,7 @@ app.include_router(auth.router)
 app.include_router(resources.router)
 app.include_router(shop.router)
 app.include_router(tree.router)
+app.include_router(admin.router)
 
 @app.get("/api/health", tags=["Health Check"])
 def health_check():
