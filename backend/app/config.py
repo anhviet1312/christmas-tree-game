@@ -3,9 +3,11 @@ import os
 # Database
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./christmas_tree.db")
 
-# Nếu deploy Neon / Render Postgres có tiền tố "postgres://", SQLAlchemy yêu cầu "postgresql://"
+# Tương thích chuẩn SQLAlchemy 2.0 cho PostgreSQL (hỗ trợ cả Neon / Render)
 if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
+elif DATABASE_URL.startswith("postgresql://") and not DATABASE_URL.startswith("postgresql+"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 # JWT Security
 SECRET_KEY = os.getenv("SECRET_KEY", "christmas-magic-super-secret-key-2026-hohoho")

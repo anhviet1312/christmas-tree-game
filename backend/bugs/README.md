@@ -44,3 +44,4 @@ Khi phát hiện hoặc xử lý một lỗi mới, hãy tạo một file markdo
 | Mã Lỗi | Tên Lỗi | Mức Độ | Trạng Thái | File Chi Tiết |
 | :---: | :--- | :---: | :---: | :--- |
 | **BUG-001** | `UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f384'` khi chạy `run.py` trên Git Bash Windows | Cao (Crash) | ✅ Resolved | [BUG-001-cp1252-unicode-encode-error.md](./BUG-001-cp1252-unicode-encode-error.md) |
+| **BUG-002** | `ModuleNotFoundError: No module named 'psycopg'` khi deploy Render kết nối PostgreSQL | Nghiêm trọng (Crash) | ✅ Resolved | [BUG-002-psycopg-module-not-found.md](./BUG-002-psycopg-module-not-found.md) |
